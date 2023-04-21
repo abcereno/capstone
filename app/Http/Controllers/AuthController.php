@@ -49,36 +49,9 @@ class AuthController extends Controller
                 "name" => $request->name,
                 "address" => $request->address,
                 "contact" => $request->contact,
-                "email" => $request->email,
-                "password" => Hash::make($request->password)
-            ]);
-            $token = $user->createToken("app")->accessToken;
-            return response([
-                "message" => "Registration Successful",
-                "token" => $token,
-                "user" => $user
-            ], 200);
-        } catch (Exception $exception) {
-            return response([
-                "message" => $exception->getMessage()
-            ], 400);
-        }
-    }
-
-    public function RegisterServiceProvider(ProviderRequest $request)
-    {
-        try{
-            // eloquent
-            $serviceName = DB::table("services")->insert([
-                    "service_name" => $request->service_name
-                ]);
-            $user = ServiceProvider::create([
-                "service_provider_name" => $request->name,
-                "address" => $request->address,
-                "contact" => $request->contact,
                 "service_name" => $request->service_name,
                 "email" => $request->email,
-                "password" => Hash::make($request->password),
+                "password" => Hash::make($request->password)
             ]);
             $token = $user->createToken("app")->accessToken;
             return response([

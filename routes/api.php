@@ -26,25 +26,26 @@ use Illuminate\Support\Facades\Route;
 Route::post("/login", [AuthController::class, "Login" ]);
 // register route
 Route::post("/register", [AuthController::class, "Register" ]);
-// register as service provider
-Route::post("/registerserviceprovider", [AuthController::class, "RegisterServiceProvider" ]);
+// forgot password route
+Route::post("/forgotpassword", [ForgotController::class, "ForgotPassword" ]);
+// reset password route
+Route::post("/resetpassword", [ResetController::class, "ResetPassword" ]);
+// user middleware to check if the user is logged in
+Route::get("/user", [UserController::class, "User" ])->middleware("auth:api");
+
+//posting routes
 Route::post("/service", [PostingController::class, "PostService" ]);
 Route::post("/review", [PostingController::class, "PostReview" ]);
 Route::post("/payment", [PostingController::class, "PostPayment" ]);
 Route::post("/order", [PostingController::class, "PostOrder" ]);
 
+// get data routes
+Route::get("/getservices", [GetController::class, "GetServiceName" ]);
 
+Route::get("/getreviews", [GetController::class, "GetReviews" ]);
+Route::get("/getreviews/{id}", [GetController::class, "GetReviewsWithRating" ]);
 
+Route::get("/getpayments", [GetController::class, "GetPayment" ]);
 
-
-
-
-
-// forgot password route
-Route::post("/forgotpassword", [ForgotController::class, "ForgotPassword" ]);
-// reset password route
-Route::post("/resetpassword", [ResetController::class, "ResetPassword" ]);
-// get user route
-// user middleware to check if the user is logged in
-Route::get("/user", [UserController::class, "User" ])->middleware("auth:api");
-Route::get("/getregistereduser", [GetController::class, "GetUsers" ]);
+Route::get("/getorders", [GetController::class, "GetOrders" ]);
+Route::get("/getorders/{id}", [GetController::class, "GetOrdersId" ]);

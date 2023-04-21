@@ -27,7 +27,7 @@ class ProviderRequest extends FormRequest
             // customize validation
             "name" => "required|max:55",
             "address" => "required|max:55",
-            "contact" => "required|max:11|number",
+            "contact" => "required|max:11",
             "service_name" => "required|max:55",
             "email" => "required|unique:users|min:5|max:60|email",
             "password" => "required|min:5|confirmed"
